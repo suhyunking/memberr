@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>save</title>
+  <!-- jquery cdn -->
+  <script
+          src="https://code.jquery.com/jquery-3.6.3.min.js"
+          integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+          crossorigin="anonymous"></script>
 </head>
 <body>
   <!-- action속성: form에 작성한 데이터를 어디로 보낼지 지정 -->
@@ -16,4 +21,37 @@
   </form>
 
 </body>
+
+<script th:inline="javascript">
+  const emailCheck = () => {
+    const email = document.getElementById("memberEmail").value;
+    const checkResult = document.getElementById("check-result");
+    console.log(email);
+    $.ajax({
+      //요청 방식 : post, url: "/member/email-check", 데이터:이메일
+      type:"post",
+      url: "/member/email-check",
+      data: {
+          "memberEmail" : email
+      },
+      success: function (res) {
+        console.log(res);
+        if (res == "ok") {
+          console.log("사용가능")
+          checkResult.style.color = "green";
+          checkResult.innerHTML = "사용가능한 이메일";
+        } else {
+          console.log("이미 사용")
+          checkResult.style.color = "red";
+          checkResult.innerHTML = "이미 사용중인 이메일";
+        }
+      },
+
+      error: function (err) {
+        console.log(err);
+      },
+    });
+  }
+
+</script>
 </html>
