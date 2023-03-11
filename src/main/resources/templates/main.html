@@ -6,7 +6,22 @@
 </head>
 <body>
   session 값 확인 : <p th:text="${session.loginEmail}"></p>
+  <button onclick="saveReq()">글작성</button>
+  <button onclick="listReq()">글목록</button>
     <a href="/member/update">내 정보 수정하기</a>
     <a href="/member/logout">로그아웃</a>
 </body>
+<script>
+    // function saveReq(){
+    //
+    // }
+
+    const saveReq = () => {
+        location.href = "/board/save"; // = <a href="/board/save"></a>
+    }
+    const listReq = () => {
+        location.href = "/board/list";
+    }
+
+</script>
 </html>
